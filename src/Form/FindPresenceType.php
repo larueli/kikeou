@@ -28,8 +28,8 @@ class FindPresenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateDebut', DateTimeType::class, ["required"=>false, 'data'=>$this->date, "view_timezone"=>"Europe/Paris"]])
-            ->add('dateFin', DateTimeType::class, ["required"=>false, 'data'=>$this->date, "view_timezone"=>"Europe/Paris"]])
+            ->add('dateDebut', DateTimeType::class, ["required"=>false, 'data'=>$this->date, "view_timezone"=>"Europe/Paris"])
+            ->add('dateFin', DateTimeType::class, ["required"=>false, 'data'=>$this->date, "view_timezone"=>"Europe/Paris"])
             ->add('username', TextType::class, ["required"=>false])
             ->add('salle', EntityType::class, ["required"=>false, "class"=>Salle::class, "choice_label"=>"nom"])
             ->add('submit', SubmitType::class)

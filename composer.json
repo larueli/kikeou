@@ -1,6 +1,15 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "name": "larueli/kikeou",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivann LARUELLE",
+            "role": "Creator",
+            "homepage": "https://ivannlaruelle.fr",
+            "email": "ivann@laruelle.me"
+        }
+    ],
     "require": {
         "php": ">=7.2.5",
         "ext-ctype": "*",

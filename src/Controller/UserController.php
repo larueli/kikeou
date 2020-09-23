@@ -55,9 +55,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $presence->setUser($this->getUser());
-            $entityManager->persist($presence);
-            $entityManager->flush();
+            if($presence->getDateDebut() > $presence->getDateFin())
+            {
+                $this->addFlash("danger", "La date de fin ne peut pas être inférieure à la date de début !");
+            }
+            else
+            {
+                $presence->setUser($this->getUser());
+                $entityManager->persist($presence);
+                $entityManager->flush();
+            }
             return $this->redirectToRoute('user_list');
         }
 
@@ -84,9 +91,16 @@ class UserController extends AbstractController
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-                $presence->setUser($this->getUser());
-                $entityManager->persist($presence);
-                $entityManager->flush();
+                if($presence->getDateDebut() > $presence->getDateFin())
+                {
+                    $this->addFlash("danger", "La date de fin ne peut pas être inférieure à la date de début !");
+                }
+                else
+                {
+                    $presence->setUser($this->getUser());
+                    $entityManager->persist($presence);
+                    $entityManager->flush();
+                }
                 return $this->redirectToRoute('user_list');
             }
 

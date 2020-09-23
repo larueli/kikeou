@@ -1,7 +1,13 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        CASProvider:
+            id: App\Security\CASProvider
+        # used to reload user from session & other features (e.g. switch_user)
+        #app_user_provider:
+        #    entity:
+        #        class: App\Entity\User
+        #        property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,7 +15,12 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: CASProvider
+            logout:
+                path: /logout
+            guard:
+                authenticators:
+                    - App\Security\CASAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

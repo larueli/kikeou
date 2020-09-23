@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des présences
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><a class="btn btn-success" href="{{ path('admin_addTypeSalle') }}">Ajouter un type de salle !</a></div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="mx-auto">
+                <div class="table-responsive" style="">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Nombre de salles</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for typeSalle in typesSalle %}
+                            <tr>
+                                <td>{{ typeSalle.nom }}</td>
+                                <td>{{ typeSalle.salles | length }}</td>
+                                <td><a href="{{ path('admin_editTypeSalle', {'id': typeSalle.id}) }}">Editer</a> /
+                                    <a href="{{ path('admin_deleteTypeSalle', {'id': typeSalle.id}) }}">Supprimer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

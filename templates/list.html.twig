@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des présences
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><a class="btn btn-success" href="{{ path('user_addPresence') }}">Ajouter une présence !</a></div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="mx-auto">
+                <div class="table-responsive" style="">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Date début</th>
+                            <th>Date fin</th>
+                            <th>Salle</th>
+                            <th>Utilisateur</th>
+                            <th>Numéro de place</th>
+                            <th>Commentaire</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for presence in presences %}
+                        <tr>
+                            <td>{{ presence.dateDebut | date('d/M/Y H:m') }}</td>
+                            <td>{{ presence.dateFin | date('d/M/Y H:m') }}</td>
+                            <td>{{ presence.salle.nom }}</td>
+                            <td>{{ presence.user.username }}</td>
+                            <td>{{ presence.numeroPlace }}</td>
+                            <td>{{ presence.commentaire }}</td>
+                            <td>
+                                {% if presence.user == app.user %}
+                                <a href="{{ path('user_editPresence', {'id': presence.id}) }}">Editer</a> /
+                                <a href="{{ path('user_deletePresence', {'id': presence.id}) }}">Supprimer</a></td>
+                                {% endif %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

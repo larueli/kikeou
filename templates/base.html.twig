@@ -2,11 +2,73 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}{% endblock %} - Kikekou</title>
+        {% block stylesheets %}
+            <!-- CSS only -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <div class="container-fluid border-bottom bg-light">
+        <div class="row">
+            <div class="mx-auto col">
+                <nav class="navbar navbar-light navbar-expand-md">
+                    <a class="navbar-brand"><a href="{{ path('user_list') }}"><b class="text-dark">Kikeou</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbar2SupportedContent"
+                            aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                        <ul class="navbar-nav">
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_find') }}"><b>Rechercher...</b> <i
+                                            class="fa fa-sign-in" aria-hidden="true"></i></a>
+                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('admin_listeSalle') }}"><b>Liste des salles</b> <i
+                                                class="fa fa-sign-in" aria-hidden="true"></i></a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_listeTypesSalle') }}"><b>Liste des types de salles</b> <i
+                                            class="fa fa-sign-in" aria-hidden="true"></i></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% if app.session %}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="container my-2">
+                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                        {{ message | raw }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+            {% block content %}
+            {% endblock %}
+    <div class="footer container-fluid align-self-end border-top pt-1">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="mt-auto text-secondary small">Développé par <a href="https://ivannlaruelle.fr">Ivann LARUELLE</a> / Code source sous licence MIT <a href="https://github.com/larueli/kikeou">larueli/kikeou</a></p>
+            </div>
+        </div>
+    </div>
+        {% block javascripts %}
+            <!-- JS, Popper.js, and jQuery -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>

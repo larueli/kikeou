@@ -17,8 +17,8 @@ class PresenceType extends AbstractType
     {
         $builder
             ->add('numeroPlace', NULL, ["required"=>true])
-            ->add('dateDebut', DateTimeType::class, ["required"=>true])
-            ->add('dateFin', DateTimeType::class,["required"=>true])
+            ->add('dateDebut', DateTimeType::class, ["required"=>true, "view_timezone"=>"Europe/Paris"])
+            ->add('dateFin', DateTimeType::class,["required"=>true, "view_timezone"=>"Europe/Paris"])
             ->add('salle', EntityType::class, ["class"=>Salle::class, "choice_label"=>"nom", "required"=>true])
             ->add('submit', SubmitType::class)
         ;

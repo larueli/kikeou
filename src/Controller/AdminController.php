@@ -168,7 +168,7 @@ class AdminController extends AbstractController
         {
             $entityManager->persist($typeSalle);
             $entityManager->flush();
-            return $this->redirectToRoute("admin_listeSalle");
+            return $this->redirectToRoute("admin_listeTypesSalle");
         }
         return $this->render("form.html.twig", ["formulaire"=>$form->createView()]);
     }

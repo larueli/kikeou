@@ -20,6 +20,7 @@ class PresenceType extends AbstractType
             ->add('dateDebut', DateTimeType::class, ["required"=>true, "view_timezone"=>"Europe/Paris"])
             ->add('dateFin', DateTimeType::class,["required"=>true, "view_timezone"=>"Europe/Paris"])
             ->add('salle', EntityType::class, ["class"=>Salle::class, "choice_label"=>"nom", "required"=>true])
+            ->add('commentaire', NULL, ["required"=>false])
             ->add('submit', SubmitType::class)
         ;
     }
